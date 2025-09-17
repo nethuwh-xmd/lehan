@@ -691,6 +691,41 @@ function setupCommandHandlers(socket, number) {
                     }
                     break;
                 }
+                    // --- Group Commands ---
+
+case 'kick':
+  {
+    if (!isAdmin) return reply("❌ Only admins can use this command!");
+    if (!mek.message.extendedTextMessage) return reply("⚠️ Reply to the user you want to kick!");
+    let mentioned = mek.message.extendedTextMessage.contextInfo.participant;
+    await sock.groupParticipantsUpdate(from, [mentioned], "remove");
+    await reply("✅ User kicked from group!");
+  }
+  break;
+
+case 'promote':
+  {
+    if (!isAdmin) return reply("❌ Only admins can use this command!");
+    if (!mek.message.extendedTextMessage) return reply("⚠️ Reply to the user you want to promote!");
+    let mentioned = mek.message.extendedTextMessage.contextInfo.participant;
+    await sock.groupParticipantsUpdate(from, [mentioned], "promote");
+    await reply("⭐ User promoted to admin!");
+  }
+  break;
+
+case 'left':
+  {
+    await sock.sendMessage(from, { text: "👋 Bye everyone, I am leaving..." });
+    await sock.groupLeave(from);
+  }
+  break;
+
+case 'hijacked':
+  {
+    let funny = "😂 Group hijacked! Now I’m the real admin (just kidding!)";
+    await sock.sendMessage(from, { text: funny });
+  }
+  break;
                 case 'song': {
                     function extractYouTubeId(url) {
                         const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
