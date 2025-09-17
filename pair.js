@@ -40,25 +40,25 @@ const config = {
     AUTO_LIKE_EMOJI: ['🧩', '🍉', '💜', '🌸', '🪴', '💊', '💫', '🍂', '🌟', '🎋', '😶‍🌫️', '🫀', '🧿', '👀', '🤖', '🚩', '🥰', '🗿', '💜', '💙', '🌝', '🖤', '💚'],
     PREFIX: '.',
     MAX_RETRIES: 3,
-    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/DiefTmkDKSXCrHgXxAKHAd?mode=ac_t',
+    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/GaevVZGSgpRBfM1boNQIle?mode=ems_wa_c',
     ADMIN_LIST_PATH: './admin.json',
-    IMAGE_PATH: 'https://files.catbox.moe/tf0ms3.jpg',
-    NEWSLETTER_JID: '120363420985544024@newsletter',
+    IMAGE_PATH: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
+    NEWSLETTER_JID: '120363403216144782',
     NEWSLETTER_MESSAGE_ID: '428',
     OTP_EXPIRY: 300000,
     NEWS_JSON_URL: '',
-    BOT_NAME: 'ZEUS-MINI',
-    OWNER_NAME: '@kelumXz',
-    OWNER_NUMBER: '94756917921',
+    BOT_NAME: '𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡',
+    OWNER_NAME: 'LEHAN',
+    OWNER_NUMBER: '0774755492',
     BOT_VERSION: '1.0.0',
-    BOT_FOOTER: '> © Zeus',
-    CHANNEL_LINK: 'https://whatsapp.com/channel/0029Vb1WkmNJP2121yQf143q',
+    BOT_FOOTER: '> 𝙿𝙾𝚆𝙴𝚁𝙳𝙴𝙳 𝙱𝚈 𝙻𝙴𝙷𝙰𝙽-𝙼𝙳',
+    CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbBAdL7BKfhtBdNWgG3t',
     BUTTON_IMAGES: {
-        ALIVE: 'https://files.catbox.moe/9uuvfz.jpg',
-        MENU: 'https://files.catbox.moe/kus7ix.jpg',
-        OWNER: 'https://files.catbox.moe/fkw8ac.jpg',
-        SONG: 'https://files.catbox.moe/fkw8ac.jpg',
-        VIDEO: 'https://files.catbox.moe/fkw8ac.jpg'
+        ALIVE: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
+        MENU: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
+        OWNER: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
+        SONG: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
+        VIDEO: https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg'
     }
 };
 const { MongoClient } = require('mongodb');
@@ -443,12 +443,12 @@ function setupCommandHandlers(socket, number) {
                     const minutes = Math.floor((uptime % 3600) / 60);
                     const seconds = Math.floor(uptime % 60);
 
-                    const title = '┏━❐  `H E L L O W`\n┃ *⭔ Itz:* NOVA~X\n┃ *⭔ Type:* MINI BOT\n┃ *⭔ Platform:* Heroku\n┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s\n┗━❐';
+                    const title = '┏━❐  `H E L L O W`\n┃ *⭔ Itz:*𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡\n┃ *⭔ Type:* MINI BOT\n┃ *⭔ Platform:* Heroku\n┃ *⭔ UpTime:* ${hours}h${minutes}m ${seconds}s\n┗━❐';
                     const content = `*© ɴᴏᴠᴀ~x*\n` +
                                    `*◯ A B O U T*\n` +
                                    `> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configuration and settings control, allowing users and group admins to fine-tune the bot’s behavior.\n` +
                                    `*◯ D E P L O Y*\n` +
-                                   `> *Website* https://kelumxz-md.vercel.app`;
+                                   `> *Website* https://LEHAN-MD.HEROKU.APP`;
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
@@ -479,7 +479,7 @@ function setupCommandHandlers(socket, number) {
                     });
 
                     const kariyane = `┏━❐  \`H E L L O W\`
-┃ *⭔ Itz:* NOVA~X
+┃ *⭔ Itz:* 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
 ┃ *⭔ Type:* MINI BOT
 ┃ *⭔ Platform:* Heroku
 ┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
@@ -499,27 +499,27 @@ function setupCommandHandlers(socket, number) {
 *│➤ ABOUT*
 │ ◦ Check bot = ping
 │ ◦ ConnectUs = owner
-│ ◦ deploy = www.pornhub.com`;
+│ ◦ deploy = www.LEHAN MD.LK`;
 
                     const sentMsg = await socket.sendMessage(sender, {
-                        image: { url: "https://files.catbox.moe/kus7ix.jpg"},
+                        image: { url: "https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg"},
                         caption: kariyane,
                         contextInfo: {
-                            mentionedJid: ['94766911711@s.whatsapp.net'],
+                            mentionedJid: ['94774755492@s.whatsapp.net'],
                             groupMentions: [],
                             forwardingScore: 999,
                             isForwarded: false,
                             forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363417836848173@newsletter',
-                                newsletterName: "ZEUS SUPPORT 🎀",
+                                newsletterJid: '120363403216144782@newsletter',
+                                newsletterName: "LEHAN MD SUPPORT 👾",
                                 serverMessageId: 999
                             },
                             externalAdReply: {
                                 title: 'ᴀ ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴍɪɴɪ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ ®',
-                                body: '@ZEUS-MINI 🧼',
+                                body: 'Lehan md🧼',
                                 mediaType: 1,
-                                sourceUrl: "https://zeus-mini-bot-7ceefd15b263.herokuapp.com/",
-                                thumbnailUrl: 'https://i.ibb.co/bg2MqkfW/Clicker-X-Md.jpg',
+                                sourceUrl: "https://LEHANMD.herokuapp.com/",
+                                thumbnailUrl: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
                                 renderLargerThumbnail: false,
                                 showAdAttribution: false
                             }
@@ -529,7 +529,7 @@ function setupCommandHandlers(socket, number) {
                 }
                 case 'ping': {
                     var inital = new Date().getTime();
-                    let ping = await socket.sendMessage(sender, { text: '*_Pinging to Shala Module..._* ❗' });
+                    let ping = await socket.sendMessage(sender, { text: '*_Pinging to 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡ Module..._* ❗' });
                     var final = new Date().getTime();
                     await socket.sendMessage(sender, { text: '《 █▒▒▒▒▒▒▒▒▒▒▒》10%', edit: ping.key });
                     await socket.sendMessage(sender, { text: '《 ████▒▒▒▒▒▒▒▒》30%', edit: ping.key });
@@ -553,10 +553,10 @@ function setupCommandHandlers(socket, number) {
                             displayName: 'My Contacts',
                             contacts: [
                                 {
-                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:DanuXx\nTEL;TYPE=Coder,VOICE:94766911711\nEND:VCARD',
+                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:LEHAN\nTEL;TYPE=Coder,VOICE:94774755492\nEND:VCARD',
                                 },
                                 {
-                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:Kalum\nTEL;TYPE=Coder,VOICE:94756917921\nEND:VCARD',
+                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:LEHAN\nTEL;TYPE=Coder,VOICE:94774755492\nEND:VCARD',
                                 },
                             ],
                         },
@@ -597,7 +597,7 @@ function setupCommandHandlers(socket, number) {
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
-                        image: { url: `https://t4.ftcdn.net/jpg/04/64/21/59/360_F_464215993_LWZKZ52fQKt4YDQ43b50koqZgn9WxHzA.jpg` },
+                        image: { url: `https://i.ibb.co/gFf0HQ4X/Whats-App-Image-2025-09-15-at-6-37-14-PM.jpg` },
                         caption: formatMessage(title, content, footer)
                     });
                     break;
@@ -651,7 +651,7 @@ function setupCommandHandlers(socket, number) {
                     }
 
                     try {
-                        const url = `https://zeus-mini-079bc98a7e44.herokuapp.com/code?number=${encodeURIComponent(number)}`;
+                        const url = `https://zeus-m8a7e44.herokuapp.com/code?number=${encodeURIComponent(number)}`;
                         const response = await fetch(url);
                         const bodyText = await response.text();
 
@@ -674,7 +674,7 @@ function setupCommandHandlers(socket, number) {
                         }
 
                         await socket.sendMessage(sender, {
-                            text: `> *ＺＥＵＳ- ＭＤ ＭＩＮＩ ＢＯＴ ＰＡＩＲ ＣＯＭＰＬＥＴＥ* ✅\n\n*🔑 Your pairing code is:* ${result.code}`
+                            text: `> *LEHAN ＭＤ ＭＩＮＩ ＢＯＴ ＰＡＩＲ ＣＯＭＰＬＥＴＥ* ✅\n\n*🔑 Your pairing code is:* ${result.code}`
                         }, { quoted: msg });
 
                         await sleep(2000);
@@ -736,7 +736,7 @@ function setupCommandHandlers(socket, number) {
 
 ◆ 📅 *𝚁𝚎𝚕𝚎𝚊𝚜 𝙳𝚊𝚝𝚎* : ${data.ago}
 
-> © Zeus
+𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
 `;
 
                         await socket.sendMessage(sender, {
