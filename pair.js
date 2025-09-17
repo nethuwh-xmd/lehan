@@ -58,7 +58,7 @@ const config = {
         MENU: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
         OWNER: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
         SONG: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
-        VIDEO: https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg'
+        VIDEO: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg'
     }
 };
 const { MongoClient } = require('mongodb');
