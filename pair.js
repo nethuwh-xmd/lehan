@@ -726,6 +726,26 @@ case 'hijacked':
     await sock.sendMessage(from, { text: funny });
   }
   break;
+                    case 'getdp':
+  {
+    try {
+      let mentioned = mek.message?.extendedTextMessage?.contextInfo?.mentionedJid?.[0] || from;
+      let dpUrl = await sock.profilePictureUrl(mentioned, "image").catch(() => null);
+
+      if (!dpUrl) return reply("❌ Couldn't fetch profile picture.");
+
+      await sock.sendMessage(from, {
+        image: { url: dpUrl },
+        caption: `🖼️ Profile Picture of @${mentioned.split("@")[0]}`,
+        mentions: [mentioned]
+      }, { quoted: mek });
+    } catch (e) {
+      console.log("getdp error:", e);
+      reply("⚠️ Error while fetching DP.");
+    }
+  }
+  break;
+                    
                 case 'song': {
                     function extractYouTubeId(url) {
                         const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
