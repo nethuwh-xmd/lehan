@@ -587,15 +587,6 @@ case 'menu': {
                     let cpuCount = os.cpus().length;
                     let hostname = os.hostname();
 
-                    let content = `
-  ◦ *Runtime*: ${runtime(process.uptime())}
-  ◦ *Os Name*: ${hostname}
-  ◦ *Total Ram*: ${totalStorage}
-  ◦ *Free Ram*: ${freeStorage}
-  ◦ *CPU Model*: ${cpuModel}
-  ◦ *CPU Speed*: ${cpuSpeed} GHz
-  ◦ *Number of CPU Cores*: ${cpuCount} 
-`;
 
                     const footer = config.BOT_FOOTER;
 
