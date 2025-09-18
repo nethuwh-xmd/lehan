@@ -591,8 +591,7 @@ case 'menu': {
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
-                        image: { url: `https://i.ibb.co/gFf0HQ4X/Whats-App-Image-2025-09-15-at-6-37-14-PM.jpg`}
-` },
+                        image: { url: "https://i.ibb.co/gFf0HQ4X/Whats-App-Image-2025-09-15-at-6-37-14-PM.jpg" }
                         caption: formatMessage(title, content, footer)
                     });
                     break;
