@@ -691,68 +691,31 @@ function setupCommandHandlers(socket, number) {
                     }
                     break;
                 }
-                    // --- Group Commands ---
-
-case 'kick':
-  {
-    if (!isAdmin) return reply("❌ Only admins can use this command!");
-    if (!mek.message.extendedTextMessage) return reply("⚠️ Reply to the user you want to kick!");
-    let mentioned = mek.message.extendedTextMessage.contextInfo.participant;
-    await sock.groupParticipantsUpdate(from, [mentioned], "remove");
-    await reply("✅ User kicked from group!");
-  }
-  break;
-
-case 'promote':
-  {
-    if (!isAdmin) return reply("❌ Only admins can use this command!");
-    if (!mek.message.extendedTextMessage) return reply("⚠️ Reply to the user you want to promote!");
-    let mentioned = mek.message.extendedTextMessage.contextInfo.participant;
-    await sock.groupParticipantsUpdate(from, [mentioned], "promote");
-    await reply("⭐ User promoted to admin!");
-  }
-  break;
-
-case 'left':
-  {
-    await sock.sendMessage(from, { text: "👋 Bye everyone, I am leaving..." });
-    await sock.groupLeave(from);
-  }
-  break;
-
-case 'hijacked':
-  {
-    let funny = "😂 Group hijacked! Now I’m the real admin (just kidding!)";
-    await sock.sendMessage(from, { text: funny });
-  }
-  break;
                     case 'getdp':
   {
     try {
       let user;
 
-      // Mentioned user check
       if (mek.message?.extendedTextMessage?.contextInfo?.mentionedJid?.[0]) {
         user = mek.message.extendedTextMessage.contextInfo.mentionedJid[0];
-      } 
-      // If group chat → take sender's jid
-      else if (from.endsWith("@g.us")) {
-        user = mek.key.participant || from;
-      } 
-      // If private chat
-      else {
+      } else if (from.endsWith("@g.us")) {
+        user = mek.key.participant;
+      } else {
         user = from;
       }
 
-      // DP URL get
-      let dpUrl;
-      try {
-        dpUrl = await sock.profilePictureUrl(user, "image");
-      } catch {
-        dpUrl = "https://i.ibb.co/fQYTwW5/no-dp.png"; // fallback image if no dp
+      // Always normalize
+      if (!user.endsWith("@s.whatsapp.net") && !user.endsWith("@g.us")) {
+        user = user.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
       }
 
-      // Send DP
+      // Try to fetch DP
+      let dpUrl = await sock.profilePictureUrl(user, "image").catch(() => null);
+
+      if (!dpUrl) {
+        return await reply("⚠️ No profile picture found for @" + user.split("@")[0]);
+      }
+
       await sock.sendMessage(
         from,
         {
@@ -765,7 +728,42 @@ case 'hijacked':
 
     } catch (e) {
       console.error("❌ getdp error:", e);
-      await reply("⚠️ Error while fetching profile picture. Try mentioning the user!");
+      await reply("⚠️ Internal error while fetching profile picture.");
+    }
+  }
+  break;    
+                    
+case 'save':
+  {
+    try {
+      if (!mek.message?.extendedTextMessage?.contextInfo?.quotedMessage) {
+        return reply("⚠️ Reply to a *status (image/video)* with `.save` to download.");
+      }
+
+      let quoted = mek.message.extendedTextMessage.contextInfo.quotedMessage;
+      let type = Object.keys(quoted)[0]; // imageMessage / videoMessage / etc.
+
+      if (type === "imageMessage" || type === "videoMessage") {
+        let msg = quoted[type];
+        let stream = await downloadContentFromMessage(msg, type.replace("Message", ""));
+        let buffer = Buffer.from([]);
+        for await (const chunk of stream) {
+          buffer = Buffer.concat([buffer, chunk]);
+        }
+
+        if (type === "imageMessage") {
+          await sock.sendMessage(from, { image: buffer, caption: "✅ Saved Status" }, { quoted: mek });
+        } else {
+          await sock.sendMessage(from, { video: buffer, caption: "✅ Saved Status" }, { quoted: mek });
+        }
+
+      } else {
+        reply("❌ Only image/video statuses are supported!");
+      }
+
+    } catch (e) {
+      console.error("❌ save error:", e);
+      reply("⚠️ Error while saving status!");
     }
   }
   break;
