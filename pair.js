@@ -435,15 +435,20 @@ function setupCommandHandlers(socket, number) {
         if (!command) return;
 
         try {
-            switch (command) {
-                case 'menu': {
-                    const startTime = socketCreationTime.get(number) || Date.now();
-                    const uptime = Math.floor((Date.now() - startTime) / 1000);
-                    const hours = Math.floor(uptime / 3600);
-                    const minutes = Math.floor((uptime % 3600) / 60);
-                    const seconds = Math.floor(uptime % 60);
+            if (!command) return;
 
-                    const title = "┋ • BOT INFO";
+try {
+    switch (command) {
+        case 'menu': {
+            const startTime = socketCreationTime.get(number) || Date.now();
+            const uptime = Math.floor((Date.now() - startTime) / 1000);
+            const hours = Math.floor(uptime / 3600);
+            const minutes = Math.floor((uptime % 3600) / 60);
+            const seconds = Math.floor(uptime % 60);
+
+            const title = "┋ • BOT INFO";
+
+            const content = `
 ┋ 🀄 Name: 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
 ┋ 🌐 Version: 1v
 ┋ 👨‍💻 Owner: LEHAN MD
@@ -451,7 +456,8 @@ function setupCommandHandlers(socket, number) {
 ┋ 📞 Your Number: ${number}
 ┋
 ┋ *Total Commands: 26+* (More coming soon!)
-┗━━━━━━━━━━━ ◉◉➢\n
+┗━━━━━━━━━━━ ◉◉➢
+
 ╔══════════════ ⭓⭓ ➤
 ║ ✨ *${config.PREFIX}alive*      ➜ Show bot status
 ╠───────────────────────────────╣
@@ -467,8 +473,29 @@ function setupCommandHandlers(socket, number) {
 ║ 📶 *${config.PREFIX}ping*      ➜ Bot ping
 ║ ⏱️ *${config.PREFIX}runtime*   ➜ Uptime info
 ║ ⏰ *${config.PREFIX}now*       ➜ Current time & date
-╚══════════════ ⭓⭓ ➣`,
-            '> POWERED BY LEHAN MD❗'
+╚══════════════ ⭓⭓ ➣
+
+> POWERED BY LEHAN MD❗`;
+
+            const footer = config.BOT_FOOTER;
+
+            await socket.sendMessage(sender, {
+                image: { url: config.BUTTON_IMAGES.MENU },
+                caption: formatMessage(title, content, footer),
+                buttons: [
+                    { buttonId: `${config.PREFIX}downloadmenu`, buttonText: { displayText: 'DOWNLOAD' }, type: 1 },
+                    { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: 'CONVERT' }, type: 1 },
+                    { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: 'OTHER' }, type: 1 },
+                    { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: 'OWNER' }, type: 1 }
+                ],
+                quoted: msg
+            });
+            break;
+        }
+    }
+} catch (err) {
+    console.error("Error in menu command:", err);
+}
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
