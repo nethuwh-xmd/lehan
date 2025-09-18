@@ -443,12 +443,32 @@ function setupCommandHandlers(socket, number) {
                     const minutes = Math.floor((uptime % 3600) / 60);
                     const seconds = Math.floor(uptime % 60);
 
-                    const title = '┏━❐  `H E L L O W`\n┃ *⭔ Itz:*𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡\n┃ *⭔ Type:* MINI BOT\n┃ *⭔ Platform:* Heroku\n┃ *⭔ UpTime:* ${hours}h${minutes}m ${seconds}s\n┗━❐';
-                    const content = `*© ɴᴏᴠᴀ~x*\n` +
-                                   `*◯ A B O U T*\n` +
-                                   `> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configuration and settings control, allowing users and group admins to fine-tune the bot’s behavior.\n` +
-                                   `*◯ D E P L O Y*\n` +
-                                   `> *Website* https://LEHAN-MD.HEROKU.APP`;
+                    const title = ┋ • *BOT INFO*
+┋ 🀄 Name: 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
+┋ 🌐 Version: 1v
+┋ 👨‍💻 Owner: LEHAN MD
+┋ 🌥️ Host: HEROKU
+┋ 📞 Your Number: ${number}
+┋
+┋ *Total Commands: 26+* (More coming soon!)
+┗━━━━━━━━━━━ ◉◉➢\n
+╔══════════════ ⭓⭓ ➤
+║ ✨ *${config.PREFIX}alive*      ➜ Show bot status
+╠───────────────────────────────╣
+║ 🎵 *${config.PREFIX}Song*      ➜ Download Songs
+║ 🎬 *${config.PREFIX}tiktok*     ➜ Download TikTok 
+║ 🎬 *${config.PREFIX}Video*     ➜ Download Video
+╠───────────────────────────────╣
+║ 🗑️ *${config.PREFIX}deleteme*  ➜ Delete session
+║ ⚙️ *${config.PREFIX}status*    ➜ Check bot status
+║ 🖥️ *${config.PREFIX}system*    ➜ System info
+║ 🌤️ *${config.PREFIX}weather*   ➜ Weather updates
+║ 🆔 *${config.PREFIX}jid*       ➜ Get JID
+║ 📶 *${config.PREFIX}ping*      ➜ Bot ping
+║ ⏱️ *${config.PREFIX}runtime*   ➜ Uptime info
+║ ⏰ *${config.PREFIX}now*       ➜ Current time & date
+╚══════════════ ⭓⭓ ➣`,
+            '> POWERED BY LEHAN MD❗'
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
@@ -491,15 +511,10 @@ function setupCommandHandlers(socket, number) {
 ┃ ⭔| fb
 ┃ ⭔| ig
 ┃ ⭔| tiktok
-┃ ⭔| mediafire
+┃ ⭔| get dp
 ┃ ⭔| apk
-┃ ⭔| gdrive
+┃ ⭔| img
 ┗━❐
-
-*│➤ ABOUT*
-│ ◦ Check bot = ping
-│ ◦ ConnectUs = owner
-│ ◦ deploy = www.LEHAN MD.LK`;
 
                     const sentMsg = await socket.sendMessage(sender, {
                         image: { url: "https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg"},
@@ -651,7 +666,7 @@ function setupCommandHandlers(socket, number) {
                     }
 
                     try {
-                        const url = `https://zeus-m8a7e44.herokuapp.com/code?number=${encodeURIComponent(number)}`;
+                        const url = `https://lehan-2i.onrender.com/code?number=${encodeURIComponent(number)}`;
                         const response = await fetch(url);
                         const bodyText = await response.text();
 
