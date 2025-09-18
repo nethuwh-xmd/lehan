@@ -501,7 +501,7 @@ case 'menu': {
 
 *│➤ ABOUT*
 │ ◦ Check bot = ping
-│ ◦ ConnectUs = owner
+│ ◦ ConnectUs = owner`
 
                     const sentMsg = await socket.sendMessage(sender, {
                         image: { url: " 
@@ -578,15 +578,78 @@ case 'menu': {
                     await socket.sendMessage(sender, ownerLocation);
                     break;
                 }
-                                    
+                   case 'yt':
+                    case 'song': {
+    try {
+        const q = args.join(" ");
+        if (!q) {
+            return reply("*ඔයාලා ගීත නමක් හෝ YouTube ලින්ක් එකක් දෙන්න...!*");
+        }
+
+        const yts = require('yt-search');
+        const search = await yts(q);
+
+        if (!search.videos.length) {
+            return reply("*ගීතය හමුනොවුණා... ❌*");
+        }
+
+        const data = search.videos[0];
+        const ytUrl = data.url;
+        const ago = data.ago;
+
+        const api = `https://sadiya-tech-apis.vercel.app/download/ytdl?url=${ytUrl}&format=mp3&apikey=sadiya`;
+        const { data: apiRes } = await axios.get(api);
+
+        if (!apiRes?.status || !apiRes.result?.download) {
+            return reply("❌ ගීතය බාගත කළ නොහැක. වෙනත් එකක් උත්සහ කරන්න!");
+        }
+
+        const result = apiRes.result;
+
+        const caption = `\`🫐 ᴛɪᴛʟᴇ :\` ${data.title}
+
+> \`🪲 ᴠɪᴇᴡꜱ :\` *${data.views}*       \`🔖ᴜᴘʟᴏᴀᴅᴇᴅ :\` *${ago}*
+
+\`00:00 ────○─────── ${data.timestamp}\`
+
+> Sell 🫟
+`;
+
+        const fakeForward = {
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: 'xxx@newsletter',
+                newsletterName: 'xxx',
+                serverMessageId: '115'
+            }
+        };
+    
+        await socket.sendMessage(sender, {
+            image: { url: result.thumbnail },
+            caption: caption,
+            contextInfo: fakeForward
+        });
         
+        await socket.sendMessage(sender, {
+            audio: { url: result.download },
+            mimetype: "audio/mpeg",
+            ptt: false
+        });
+
+    } catch (e) {
+        console.error(e);
+        reply("*ඇතැම් දෝෂයකි! පසුව නැවත උත්සහ කරන්න.*");
+    }
+    break;
+}
 
 //// Fc follow /
 
 case 'fc': {
                     if (args.length === 0) {
                         return await socket.sendMessage(sender, {
-                            text: '❗ Please provide a channel JID.\n\nExample:\n.fcn 120363403216144782@newsletter'
+                            text: '❗ Please provide a channel JID.\n\nExample:\n.fcn 120363396379901844@newsletter'
                         });
                     }
 
