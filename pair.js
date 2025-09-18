@@ -439,63 +439,19 @@ function setupCommandHandlers(socket, number) {
 
 try {
     switch (command) {
-        case 'menu': {
-            const startTime = socketCreationTime.get(number) || Date.now();
-            const uptime = Math.floor((Date.now() - startTime) / 1000);
-            const hours = Math.floor(uptime / 3600);
-            const minutes = Math.floor((uptime % 3600) / 60);
-            const seconds = Math.floor(uptime % 60);
+case 'menu': {
+                    const startTime = socketCreationTime.get(number) || Date.now();
+                    const uptime = Math.floor((Date.now() - startTime) / 1000);
+                    const hours = Math.floor(uptime / 3600);
+                    const minutes = Math.floor((uptime % 3600) / 60);
+                    const seconds = Math.floor(uptime % 60);
 
-            const title = "┋ • BOT INFO";
-
-            const content = `
-┋ 🀄 Name: 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
-┋ 🌐 Version: 1v
-┋ 👨‍💻 Owner: LEHAN MD
-┋ 🌥️ Host: HEROKU
-┋ 📞 Your Number: ${number}
-┋
-┋ *Total Commands: 26+* (More coming soon!)
-┗━━━━━━━━━━━ ◉◉➢
-
-╔══════════════ ⭓⭓ ➤
-║ ✨ *${config.PREFIX}alive*      ➜ Show bot status
-╠───────────────────────────────╣
-║ 🎵 *${config.PREFIX}Song*      ➜ Download Songs
-║ 🎬 *${config.PREFIX}tiktok*     ➜ Download TikTok 
-║ 🎬 *${config.PREFIX}Video*     ➜ Download Video
-╠───────────────────────────────╣
-║ 🗑️ *${config.PREFIX}deleteme*  ➜ Delete session
-║ ⚙️ *${config.PREFIX}status*    ➜ Check bot status
-║ 🖥️ *${config.PREFIX}system*    ➜ System info
-║ 🌤️ *${config.PREFIX}weather*   ➜ Weather updates
-║ 🆔 *${config.PREFIX}jid*       ➜ Get JID
-║ 📶 *${config.PREFIX}ping*      ➜ Bot ping
-║ ⏱️ *${config.PREFIX}runtime*   ➜ Uptime info
-║ ⏰ *${config.PREFIX}now*       ➜ Current time & date
-╚══════════════ ⭓⭓ ➣
-
-> POWERED BY LEHAN MD❗`;
-
-            const footer = config.BOT_FOOTER;
-
-            await socket.sendMessage(sender, {
-                image: { url: config.BUTTON_IMAGES.MENU },
-                caption: formatMessage(title, content, footer),
-                buttons: [
-                    { buttonId: `${config.PREFIX}downloadmenu`, buttonText: { displayText: 'DOWNLOAD' }, type: 1 },
-                    { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: 'CONVERT' }, type: 1 },
-                    { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: 'OTHER' }, type: 1 },
-                    { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: 'OWNER' }, type: 1 }
-                ],
-                quoted: msg
-            });
-            break;
-        }
-    }
-} catch (err) {
-    console.error("Error in menu command:", err);
-}
+                    const title = '┏━❐  `ＨＥＬＬＯＷ🌝`\n┃ *⭔ 𝙽𝙰𝙼𝙴:* 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡\n┃ *⭔ Type:* 𝙼𝙸𝙽𝙸 𝚆𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃\n┃ *⭔ Platform:* 𝙷𝙴𝚁𝙾𝙺𝚄\n┃ *⭔ 𝙲𝙷𝙰𝙽𝙽𝙴𝙻:* https://whatsapp.com/channel/0029VbBAdL7BKfhtBdNWgG3t┗━❐';
+                    const content = `*© 𝐋𝐄𝐇𝐀𝐍-𝐌𝐃*\n` +
+                                   `*◯ A B O U T*\n` +
+                                   `> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configuration and settings control, allowing users and group admins to fine-tune the bot’s behavior.\n` +
+                                   `*◯ D E P L O Y*\n` +
+                                   `> *Website* https:l.app`;
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
@@ -526,25 +482,30 @@ try {
                     });
 
                     const kariyane = `┏━❐  \`H E L L O W\`
-┃ *⭔ Itz:* 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
+┃ *⭔ NAME:* 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
 ┃ *⭔ Type:* MINI BOT
 ┃ *⭔ Platform:* Heroku
-┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
+┃ *⭔ UPDATE:* https://whatsapp.com/channel/0029VbBAdL7BKfhtBdNWgG3t
 ┗━❐
 
 ┏━❐
-┃ ⭔| song
-┃ ⭔| video
-┃ ⭔| fb
-┃ ⭔| ig
-┃ ⭔| tiktok
-┃ ⭔| get dp
-┃ ⭔| apk
-┃ ⭔| img
+┃ 🎧 song
+┃ 🤖 video
+┃ 🏋️ fb
+┃ 🎉️ ig
+┃ 🎑️ tiktok
+┃ 🥈 getdp
+┃ 🎟️ apk
+┃ 🎍 csong
 ┗━❐
 
+*│➤ ABOUT*
+│ ◦ Check bot = ping
+│ ◦ ConnectUs = owner
+
                     const sentMsg = await socket.sendMessage(sender, {
-                        image: { url: "https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg"},
+                        image: { url: " 
+                        https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg"},
                         caption: kariyane,
                         contextInfo: {
                             mentionedJid: ['94774755492@s.whatsapp.net'],
@@ -553,14 +514,14 @@ try {
                             isForwarded: false,
                             forwardedNewsletterMessageInfo: {
                                 newsletterJid: '120363403216144782@newsletter',
-                                newsletterName: "LEHAN MD SUPPORT 👾",
+                                newsletterName: "LEHAN MD 🎀",
                                 serverMessageId: 999
                             },
                             externalAdReply: {
                                 title: 'ᴀ ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴍɪɴɪ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ ®',
-                                body: 'Lehan md🧼',
+                                body: '@LEHAN MD🧼',
                                 mediaType: 1,
-                                sourceUrl: "https://LEHANMD.herokuapp.com/",
+                                sourceUrl: "https://z-7ceefd15b263.herokuapp.com/",
                                 thumbnailUrl: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
                                 renderLargerThumbnail: false,
                                 showAdAttribution: false
@@ -608,7 +569,7 @@ try {
                         location: {
                             degreesLatitude: 37.7749,
                             degreesLongitude: -122.4194,
-                            name: 'Zeus Address',
+                            name: 'LEHAN ADDRESS',
                             address: 'Rathnapura, SriLanka',
                         },
                     };
@@ -618,7 +579,7 @@ try {
                     break;
                 }
                 case 'system': {
-                    const title = "乂 *S Y S T E M - I N F O*";
+                    const title = "乂 *SYSTEM🀄🤖*";
                     let totalStorage = Math.floor(os.totalmem() / 1024 / 1024) + 'MB';
                     let freeStorage = Math.floor(os.freemem() / 1024 / 1024) + 'MB';
                     let cpuModel = os.cpus()[0].model;
@@ -639,7 +600,8 @@ try {
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
-                        image: { url: `https://i.ibb.co/gFf0HQ4X/Whats-App-Image-2025-09-15-at-6-37-14-PM.jpg` },
+                        image: { url: `https://i.ibb.co/gFf0HQ4X/Whats-App-Image-2025-09-15-at-6-37-14-PM.jpg`}
+` },
                         caption: formatMessage(title, content, footer)
                     });
                     break;
@@ -733,83 +695,64 @@ try {
                     }
                     break;
                 }
-                    case 'getdp':
-  {
-    try {
-      let user;
+                    case 'alive': {
+    const startTime = socketCreationTime.get(number) || Date.now();
+    const uptime = Math.floor((Date.now() - startTime) / 1000);
+    const hours = Math.floor(uptime / 3600);
+    const minutes = Math.floor((uptime % 3600) / 60);
+    const seconds = Math.floor(uptime % 60);
+    const channelStatus = config.NEWSLETTER_JID ? '✅ Followed' : '❌ Not followed';
+    
+    const botInfo = `
+╭─── 〘𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡〙 ───
+│   🌐 Version: 𝐯1
+│
+╭─── 〘 📊 SESSION INFO 〙 ───
+│
+│   ⏳ Uptime: ${hours}h ${minutes}m ${seconds}s
+│   🟢 Active Sessions: ${activeSockets.size}
+│   📞 Your Number: ${number}
+│   📢 Channel: ${channelStatus}
+│   🔢 Owner Number: 94710695082
 
-      if (mek.message?.extendedTextMessage?.contextInfo?.mentionedJid?.[0]) {
-        user = mek.message.extendedTextMessage.contextInfo.mentionedJid[0];
-      } else if (from.endsWith("@g.us")) {
-        user = mek.key.participant;
-      } else {
-        user = from;
-      }
 
-      // Always normalize
-      if (!user.endsWith("@s.whatsapp.net") && !user.endsWith("@g.us")) {
-        user = user.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
-      }
+╭─── 〘 🛠️ COMMANDS 〙 ───────
+│
+│   🎶 ${config.PREFIX}menu      - Watch all command
+│   🗑️ ${config.PREFIX}deleteme  - Delete session
+│   💬 ${config.PREFIX}ping      - Bot life testing
+│   📰 ${config.PREFIX}status    - Latest updates
+│   📈 ${config.PREFIX}owner     - Bot developed
+│   ⏱️ ${config.PREFIX}runtime   - Total runtime
+│   🏓 ${config.PREFIX}latency   - Ping test
+│
+╭─── 〘 🌐 𝐖𝐄𝐁 〙 ──────────
+│
+>❗𝐂𝐎𝐌𝐌𝐈𝐍𝐆 𝐒𝐎𝐎𝐍-
+│
+╰───────────────────────
+    `.trim();
 
-      // Try to fetch DP
-      let dpUrl = await sock.profilePictureUrl(user, "image").catch(() => null);
-
-      if (!dpUrl) {
-        return await reply("⚠️ No profile picture found for @" + user.split("@")[0]);
-      }
-
-      await sock.sendMessage(
-        from,
-        {
-          image: { url: dpUrl },
-          caption: `🖼️ Profile Picture of @${user.split("@")[0]}`,
-          mentions: [user],
-        },
-        { quoted: mek }
-      );
-
-    } catch (e) {
-      console.error("❌ getdp error:", e);
-      await reply("⚠️ Internal error while fetching profile picture.");
-    }
-  }
-  break;    
-                    
-case 'save':
-  {
-    try {
-      if (!mek.message?.extendedTextMessage?.contextInfo?.quotedMessage) {
-        return reply("⚠️ Reply to a *status (image/video)* with `.save` to download.");
-      }
-
-      let quoted = mek.message.extendedTextMessage.contextInfo.quotedMessage;
-      let type = Object.keys(quoted)[0]; // imageMessage / videoMessage / etc.
-
-      if (type === "imageMessage" || type === "videoMessage") {
-        let msg = quoted[type];
-        let stream = await downloadContentFromMessage(msg, type.replace("Message", ""));
-        let buffer = Buffer.from([]);
-        for await (const chunk of stream) {
-          buffer = Buffer.concat([buffer, chunk]);
+    await socket.sendMessage(sender, {
+        image: { url: config.RCD_IMAGE_PATH },
+        caption: formatMessage(
+            '𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡',
+            botInfo,
+            '𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡,'
+        ),
+        contextInfo: {
+            mentionedJid: ['94710695082@s.whatsapp.net'],
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363417186678299@newsletter',
+                newsletterName: '𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡',
+                serverMessageId: 143
+            }
         }
-
-        if (type === "imageMessage") {
-          await sock.sendMessage(from, { image: buffer, caption: "✅ Saved Status" }, { quoted: mek });
-        } else {
-          await sock.sendMessage(from, { video: buffer, caption: "✅ Saved Status" }, { quoted: mek });
-        }
-
-      } else {
-        reply("❌ Only image/video statuses are supported!");
-      }
-
-    } catch (e) {
-      console.error("❌ save error:", e);
-      reply("⚠️ Error while saving status!");
-    }
-  }
-  break;
-                    
+    });
+    break;
+           } 
                 case 'song': {
                     function extractYouTubeId(url) {
                         const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -1094,7 +1037,7 @@ async function EmpirePair(number, res) {
                     await socket.sendMessage(userJid, {
                         image: { url: config.IMAGE_PATH },
                         caption: formatMessage(
-                            '*kk*',
+                            '*𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡*',
                             `✅ Successfully connected!\n\n🔢 Number: ${sanitizedNumber}\n🍁 Channel: ${config.NEWSLETTER_JID ? 'Followed' : 'Not followed'}\n\n📋 Available Category:\n📌${config.PREFIX}alive - Show bot status\n📌${config.PREFIX}menu - Show bot command\n📌${config.PREFIX}song - Downlode Songs\n📌${config.PREFIX}video - Download Video\n📌${config.PREFIX}pair - Deploy Mini Bot\n📌${config.PREFIX}vv - Anti view one`,
                             'ttt'
                         )
