@@ -729,19 +729,43 @@ case 'hijacked':
                     case 'getdp':
   {
     try {
-      let mentioned = mek.message?.extendedTextMessage?.contextInfo?.mentionedJid?.[0] || from;
-      let dpUrl = await sock.profilePictureUrl(mentioned, "image").catch(() => null);
+      let user;
 
-      if (!dpUrl) return reply("❌ Couldn't fetch profile picture.");
+      // Mentioned user check
+      if (mek.message?.extendedTextMessage?.contextInfo?.mentionedJid?.[0]) {
+        user = mek.message.extendedTextMessage.contextInfo.mentionedJid[0];
+      } 
+      // If group chat → take sender's jid
+      else if (from.endsWith("@g.us")) {
+        user = mek.key.participant || from;
+      } 
+      // If private chat
+      else {
+        user = from;
+      }
 
-      await sock.sendMessage(from, {
-        image: { url: dpUrl },
-        caption: `🖼️ Profile Picture of @${mentioned.split("@")[0]}`,
-        mentions: [mentioned]
-      }, { quoted: mek });
+      // DP URL get
+      let dpUrl;
+      try {
+        dpUrl = await sock.profilePictureUrl(user, "image");
+      } catch {
+        dpUrl = "https://i.ibb.co/fQYTwW5/no-dp.png"; // fallback image if no dp
+      }
+
+      // Send DP
+      await sock.sendMessage(
+        from,
+        {
+          image: { url: dpUrl },
+          caption: `🖼️ Profile Picture of @${user.split("@")[0]}`,
+          mentions: [user],
+        },
+        { quoted: mek }
+      );
+
     } catch (e) {
-      console.log("getdp error:", e);
-      reply("⚠️ Error while fetching DP.");
+      console.error("❌ getdp error:", e);
+      await reply("⚠️ Error while fetching profile picture. Try mentioning the user!");
     }
   }
   break;
