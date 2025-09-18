@@ -443,7 +443,7 @@ function setupCommandHandlers(socket, number) {
                     const minutes = Math.floor((uptime % 3600) / 60);
                     const seconds = Math.floor(uptime % 60);
 
-                    const title = ┋ • *BOT INFO*
+                    const title = ┋ • "BOT INFO"
 ┋ 🀄 Name: 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡
 ┋ 🌐 Version: 1v
 ┋ 👨‍💻 Owner: LEHAN MD
