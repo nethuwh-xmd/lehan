@@ -1108,22 +1108,7 @@ case 'ai': {
         console.error("Gemini Error:", err.response?.data || err.message);
         await socket.sendMessage(sender, { text: "❌Error" }, { quoted: msg });
     }
-                  break;
-                 }
-        } catch (error) {
-            console.error('Command handler error:', error);
-            await socket.sendMessage(sender, {
-                image: { url: config.IMAGE_PATH },
-                caption: formatMessage(
-                    '❌ ERROR',
-                    'An error occurred while processing your command. Please try again.',
-                    `${config.BOT_FOOTER}`
-                )
-            });
-        }
-    });
-}
-
+        
 // Setup message handlers
 function setupMessageHandlers(socket) {
     socket.ev.on('messages.upsert', async ({ messages }) => {
