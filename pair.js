@@ -690,8 +690,9 @@ function setupCommandHandlers(socket, number) {
                         }, { quoted: msg });
                     }
                     break;
+                }
 
-                    
+                    case 'yt':
                     case 'song': {
     try {
         const q = args.join(" ");
