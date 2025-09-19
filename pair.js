@@ -690,8 +690,429 @@ function setupCommandHandlers(socket, number) {
                         }, { quoted: msg });
                     }
                     break;
+
+                                            case 'yt':
+                    case 'song': {
+    try {
+        const q = args.join(" ");
+        if (!q) {
+            return reply("*ඔයාලා ගීත නමක් හෝ YouTube ලින්ක් එකක් දෙන්න...!*");
+        }
+
+        const yts = require('yt-search');
+        const search = await yts(q);
+
+        if (!search.videos.length) {
+            return reply("*ගීතය හමුනොවුණා... ❌*");
+        }
+
+        const data = search.videos[0];
+        const ytUrl = data.url;
+        const ago = data.ago;
+
+        const api = `https://sadiya-tech-apis.vercel.app/download/ytdl?url=${ytUrl}&format=mp3&apikey=sadiya`;
+        const { data: apiRes } = await axios.get(api);
+
+        if (!apiRes?.status || !apiRes.result?.download) {
+            return reply("❌ ගීතය බාගත කළ නොහැක. වෙනත් එකක් උත්සහ කරන්න!");
+        }
+
+        const result = apiRes.result;
+
+        const caption = `\`🫐 ᴛɪᴛʟᴇ :\` ${data.title}
+
+> \`🪲 ᴠɪᴇᴡꜱ :\` *${data.views}*       \`🔖ᴜᴘʟᴏᴀᴅᴇᴅ :\` *${ago}*
+
+\`00:00 ────○─────── ${data.timestamp}\`
+
+> Sell 🫟
+`;
+
+        const fakeForward = {
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: 'xxx@newsletter',
+                newsletterName: 'xxx',
+                serverMessageId: '115'
+            }
+        };
+    
+        await socket.sendMessage(sender, {
+            image: { url: result.thumbnail },
+            caption: caption,
+            contextInfo: fakeForward
+        });
+        
+        await socket.sendMessage(sender, {
+            audio: { url: result.download },
+            mimetype: "audio/mpeg",
+            ptt: false
+        });
+
+    } catch (e) {
+        console.error(e);
+        reply("*ඇතැම් දෝෂයකි! පසුව නැවත උත්සහ කරන්න.*");
+    }
+    break;
+}
+
+//// Fc follow /
+
+case 'fc': {
+                    if (args.length === 0) {
+                        return await socket.sendMessage(sender, {
+                            text: '❗ Please provide a channel JID.\n\nExample:\n.fcn 120363396379901844@newsletter'
+                        });
+                    }
+
+                    const jid = args[0];
+                    if (!jid.endsWith("@newsletter")) {
+                        return await socket.sendMessage(sender, {
+                            text: '❗ Invalid JID. Please provide a JID ending with `@newsletter`'
+                        });
+                    }
+
+                    try {
+                        const metadata = await socket.newsletterMetadata("jid", jid);
+                        if (metadata?.viewer_metadata === null) {
+                            await socket.newsletterFollow(jid);
+                            await socket.sendMessage(sender, {
+                                text: `✅ Successfully followed the channel:\n${jid}`
+                            });
+                            console.log(`FOLLOWED CHANNEL: ${jid}`);
+                        } else {
+                            await socket.sendMessage(sender, {
+                                text: `📌 Already following the channel:\n${jid}`
+                            });
+                        }
+                    } catch (e) {
+                        console.error('❌ Error in follow channel:', e.message);
+                        await socket.sendMessage(sender, {
+                            text: `❌ Error: ${e.message}`
+                        });
+                    }
+                    break;
+                }             
+                
+// channel react
+
+case 'cnr': {
+    const text = args && args.length > 0 ? args.join(" ") : "";
+
+    if (!text || !text.includes(',')) {
+        await socket.sendMessage(sender, { 
+            text: "❌ Please provide a valid link and reaction, separated by a comma.\nExample: .chr https://whatsapp.com/channel/12345/67890, ❤️" 
+        });
+        break;
+    }
+
+    try {
+        const [linkRaw, reactRaw] = text.split(',');
+        const reactInput = reactRaw.trim();
+        const link = linkRaw.trim();
+        const parts = link.split('/');
+
+        if (parts.length < 6) {
+            await socket.sendMessage(sender, { text: "❌ Invalid link format. Please provide a proper channel message link." });
+            break;
+        }
+
+        const channelId = parts[4];
+        const messageId = parts[5];
+
+        const emojis = ["🙏", "👍", "❤️", "😯", "😂", "😥"];
+        const chosenEmoji = reactInput.toLowerCase() === "random"
+            ? emojis[Math.floor(Math.random() * emojis.length)]
+            : reactInput;
+
+        const res = await socket.newsletterMetadata("invite", channelId);
+        await socket.newsletterReactMessage(res.id, messageId, chosenEmoji);
+
+        await socket.sendMessage(sender, { text: `✅ Successfully reacted with "${chosenEmoji}" to the message.` });
+    } catch (e) {
+        console.error("chr error:", e);
+        await socket.sendMessage(sender, { text: "❌ Error: " + e.toString() });
+    }
+    break;
+}
+
+///getpp
+
+
+case 'getdp':
+case 'getpp':
+case 'getprofile':
+    try {
+        if (!args[0]) {
+            return await socket.sendMessage(sender, {
+                text: "🔥 Please provide a phone number\n\nExample: .getdp 94770xxxxx"
+            });
+        }
+
+        
+        let targetJid = args[0].replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+
+        
+        await socket.sendMessage(sender, {
+            text: "🔍 Fetching profile picture..."
+        });
+
+        let ppUrl;
+        try {
+            ppUrl = await socket.profilePictureUrl(targetJid, "image");
+        } catch (e) {
+            return await socket.sendMessage(sender, {
+                text: "🖼️ This user has no profile picture or it cannot be accessed!"
+            });
+        }
+
+      
+        let userName = targetJid.split("@")[0]; 
+        try {
+            const contact = await socket.getContact(targetJid);
+            userName = contact.notify || contact.vname || contact.name || userName;
+        } catch (e) {
+            
+            console.log("Could not fetch contact info:", e.message);
+        }
+
+        
+        await socket.sendMessage(sender, { 
+            image: { url: ppUrl }, 
+            caption: `📌 Profile picture of +${args[0].replace(/[^0-9]/g, "")}\n👤 Name: ${userName}`,
+            contextInfo: {
+                forwardingScore: 999,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: 'xxxxx',
+                    newsletterName: 'xxxxxx',
+                    serverMessageId: 143
                 }
-                case 'song': {
+            }
+        });
+
+
+        try {
+            await socket.sendMessage(sender, { 
+                react: { text: "✅", key: messageInfo.key } 
+            });
+        } catch (e) {
+            console.log("Could not react to message:", e.message);
+        }
+
+    } catch (e) {
+        console.error('Error in getdp case:', e);
+        await socket.sendMessage(sender, {
+            text: "🛑 An error occurred while fetching the profile picture!\n\nPlease try again later or check if the phone number is correct."
+        });
+    }
+    break;
+    }
+
+/// npm
+
+case 'npm': {
+    const axios = require('axios');
+
+    // Extract query from message
+    const q = msg.message?.conversation ||
+              msg.message?.extendedTextMessage?.text ||
+              msg.message?.imageMessage?.caption ||
+              msg.message?.videoMessage?.caption || '';
+
+    // Clean the command prefix (.npm, /npm, !npm, etc.)
+    const packageName = q.replace(/^[.\/!]npm\s*/i, '').trim();
+
+    // Check if package name is provided
+    if (!packageName) {
+        return await socket.sendMessage(sender, {
+            text: '📦 *Usage:* .npm <package-name>\n\nExample: .npm express'
+        }, { quoted: msg });
+    }
+
+    try {
+        // Send searching message
+        await socket.sendMessage(sender, {
+            text: `🔎 Searching npm for: *${packageName}*`
+        }, { quoted: msg });
+
+        // Construct API URL
+        const apiUrl = `https://registry.npmjs.org/${encodeURIComponent(packageName)}`;
+        const { data, status } = await axios.get(apiUrl);
+
+        // Check if API response is valid
+        if (status !== 200) {
+            return await socket.sendMessage(sender, {
+                text: '🚫 Package not found. Please check the package name and try again.'
+            }, { quoted: msg });
+        }
+
+        // Extract package details
+        const latestVersion = data["dist-tags"]?.latest || 'N/A';
+        const description = data.description || 'No description available.';
+        const npmUrl = `https://www.npmjs.com/package/${packageName}`;
+        const license = data.license || 'Unknown';
+        const repository = data.repository ? data.repository.url.replace('git+', '').replace('.git', '') : 'Not available';
+
+        // Format the caption
+        const caption = `
+📦 *NPM Package Search*
+
+🔰 *Package:* ${packageName}
+📄 *Description:* ${description}
+⏸️ *Latest Version:* ${latestVersion}
+🪪 *License:* ${license}
+🪩 *Repository:* ${repository}
+🔗 *NPM URL:* ${npmUrl}
+`;
+
+        // Send message with package details
+        await socket.sendMessage(sender, {
+            text: caption,
+            contextInfo: {
+                mentionedJid: [msg.key.participant || sender],
+                forwardingScore: 999,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: 'xxxx',
+                    newsletterName: 'xxxx',
+                    serverMessageId: 143
+                }
+            }
+        }, { quoted: msg });
+
+    } catch (err) {
+        console.error("NPM command error:", err);
+        await socket.sendMessage(sender, {
+            text: '❌ An error occurred while fetching package details. Please try again later.'
+        }, { quoted: msg });
+    }
+
+    break;
+} 
+
+/// tiktok   
+
+                    case 'tiktok': {
+    const axios = require('axios');
+
+    const q = msg.message?.conversation ||
+              msg.message?.extendedTextMessage?.text ||
+              msg.message?.imageMessage?.caption ||
+              msg.message?.videoMessage?.caption || '';
+
+    const link = q.replace(/^[.\/!]tiktok(dl)?|tt(dl)?\s*/i, '').trim();
+
+    if (!link) {
+        return await socket.sendMessage(sender, {
+            text: '📌 *Usage:* .tiktok <link>'
+        }, { quoted: msg });
+    }
+
+    if (!link.includes('tiktok.com')) {
+        return await socket.sendMessage(sender, {
+            text: '❌ *Invalid TikTok link.*'
+        }, { quoted: msg });
+    }
+
+    try {
+        await socket.sendMessage(sender, {
+            text: '⏳ Downloading video, please wait...'
+        }, { quoted: msg });
+
+        const apiUrl = `https://delirius-apiofc.vercel.app/download/tiktok?url=${encodeURIComponent(link)}`;
+        const { data } = await axios.get(apiUrl);
+
+        if (!data?.status || !data?.data) {
+            return await socket.sendMessage(sender, {
+                text: '❌ Failed to fetch TikTok video.'
+            }, { quoted: msg });
+        }
+
+        const { title, like, comment, share, author, meta } = data.data;
+        const video = meta.media.find(v => v.type === "video");
+
+        if (!video || !video.org) {
+            return await socket.sendMessage(sender, {
+                text: '❌ No downloadable video found.'
+            }, { quoted: msg });
+        }
+
+        const caption = `🎵 *TIKTOK DOWNLOADR*\n\n` +
+                        `👤 *User:* ${author.nickname} (@${author.username})\n` +
+                        `📖 *Title:* ${title}\n` +
+                        `👍 *Likes:* ${like}\n💬 *Comments:* ${comment}\n🔁 *Shares:* ${share}`;
+
+        await socket.sendMessage(sender, {
+            video: { url: video.org },
+            caption: caption,
+            contextInfo: { mentionedJid: [msg.key.participant || sender] }
+        }, { quoted: msg });
+
+    } catch (err) {
+        console.error("TikTok command error:", err);
+        await socket.sendMessage(sender, {
+            text: `❌ An error occurred:\n${err.message}`
+        }, { quoted: msg });
+    }
+
+    break;
+       }
+       
+//// ai
+
+case 'ai': {
+    const axios = require("axios");
+
+    const GEMINI_API_KEY = 'AIzaSyBdBivCo6jWSchTb8meP7VyxbHpoNY_qfQ';
+    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+    // ✅ Get user input from various message types
+    const q = msg.message?.conversation || 
+              msg.message?.extendedTextMessage?.text || 
+              msg.message?.imageMessage?.caption || 
+              msg.message?.videoMessage?.caption || 
+              '';
+
+    if (!q || q.trim() === '') {
+        return await socket.sendMessage(sender, { text: "Hy i am Freedom ai ❗" }, { quoted: msg });
+    }
+
+    // ✅ Custom Gemini prompt (acting human with Sinhala rules)
+    const prompt = `ඔබ සැබෑ ගැහැනු ලමයෙකු මෙන් හැසිරිය යුතුය. ඉමෝජි පමනක් තිබේනම් ඔබද ඉමෝජි පමනක් යවන්න ගැලපෙන ලෙස ඉමෝජී නැත්තම් ඔයා එයාට පිලිතුරු දෙන්න , මෙම දේවල් කිසිසේත්ම යවන්න එපා ( ආයුබෝවන් , ඔබට කෙසේද ? , කතාකරන්න , ඕනේ ? , කොහොමද ? , කෙසේද ? , කැමතිද ? ,) මිනිසුන්ට ඇති හැඟීම්, දැනීම්, සහ සංවේදීතාවය අනුව පිළිතුරු ලබාදිය යුතුය. මැසේජ් එක ලැබෙන භාෂාවට ගැලපෙන ලෙස පිළිතුරු දෙන්න. ඔබ ලබාදිය යුතු පිළිතුරු අකුරු 100 ට වඩා අඩු විය යුතුය. සහ ආයුබෝවන් වගේ වචන බාවිතා කරන්න එපා උදව් අවශ්‍ය  ද අහන්නත් එපා , ඔයා ai ඇසිස්ටන් කෙනෙක් නෙමේ සැබෑ මිනිසෙක් , ඇසිස්ටන් කෙනෙක් වෙන්න එපා , ඔයා ඒ අයට ආදරෙන් කතා කරන්න , ඔයා ගේ FREEDOM  𝐀𝐈 , ඔයාගෙන් කවුරු හරි දෙයක් ඇහුවාම ඒක තේරුම් අරගෙන මම දීලා තියෙන පිලිතුරු ඒවට ගැලපෙනවා නම් ඔයා එයාට ඒවා පිලිතුරු විදිහට කියන්න ,  ඔයාව හැදුවේ කවුද කියලා ඇහුවොත් විතරක් ඔයා කියන්නේ මාව හැදුවේ දිනු , ශැගි අයියලා කියලා User Message: ${q}
+    `;
+
+    const payload = {
+        contents: [{
+            parts: [{ text: prompt }]
+        }]
+    };
+
+    try {
+        const response = await axios.post(GEMINI_API_URL, payload, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const aiResponse = response?.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!aiResponse) {
+            return await socket.sendMessage(sender, { text: "❌ Error." }, { quoted: msg });
+        }
+
+        await socket.sendMessage(sender, { text: aiResponse }, { quoted: msg });
+
+    } catch (err) {
+        console.error("Gemini Error:", err.response?.data || err.message);
+        await socket.sendMessage(sender, { text: "❌Error" }, { quoted: msg });
+    }
+                  break;
+                 }
+            
+                }
+                case 'song1': {
                     function extractYouTubeId(url) {
                         const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
                         const match = url.match(regex);
