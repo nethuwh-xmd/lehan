@@ -572,38 +572,7 @@ function setupCommandHandlers(socket, number) {
                     break;
                 }
                 
-                case 'fb': {
-                    const q = msg.message?.conversation || 
-                              msg.message?.extendedTextMessage?.text || 
-                              msg.message?.imageMessage?.caption || 
-                              msg.message?.videoMessage?.caption || '';
-
-                    const fbUrl = q?.trim();
-
-                    if (!/facebook\.com|fb\.watch/.test(fbUrl)) {
-                        return await socket.sendMessage(sender, { text: '🧩 *Please provide a valid Facebook video link.*' });
-                    }
-
-                    try {
-                        const res = await axios.get(`https://suhas-bro-api.vercel.app/download/fbdown?url=${encodeURIComponent(fbUrl)}`);
-                        const result = res.data.result;
-
-                        await socket.sendMessage(sender, { react: { text: '⬇', key: msg.key } });
-
-                        await socket.sendMessage(sender, {
-                            video: { url: result.sd },
-                            mimetype: 'video/mp4',
-                            caption: '> > © 𝙿𝙾𝚆𝙴𝚁𝙳𝙴𝙳 𝙱𝚈 𝙻𝙴𝙷𝙰𝙽-𝙼𝙳'
-                        }, { quoted: msg });
-
-                        await socket.sendMessage(sender, { react: { text: '✔', key: msg.key } });
-
-                    } catch (e) {
-                        console.log(e);
-                        await socket.sendMessage(sender, { text: '*❌ Error downloading video.*' });
-                    }
-                    break;
-                }
+              
                 case 'pair': {
                     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
