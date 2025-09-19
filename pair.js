@@ -843,7 +843,7 @@ case 'cnr': {
 
 case 'getdp':
 case 'getpp':
-case 'getprofile':
+case 'getprofile': {
     try {
         if (!args[0]) {
             return await socket.sendMessage(sender, {
@@ -910,7 +910,6 @@ case 'getprofile':
     }
     break;
     }
-
 /// npm
 
 case 'npm': {
