@@ -504,8 +504,7 @@ case 'menu': {
 │ ◦ ConnectUs = owner`
 
                     const sentMsg = await socket.sendMessage(sender, {
-                        image: { url: " 
-                        https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg"},
+                        image: { url: "https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg"},
                         caption: kariyane,
                         contextInfo: {
                             mentionedJid: ['94774755492@s.whatsapp.net'],
