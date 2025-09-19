@@ -691,7 +691,7 @@ function setupCommandHandlers(socket, number) {
                     }
                     break;
 
-                                            case 'yt':
+                    
                     case 'song': {
     try {
         const q = args.join(" ");
