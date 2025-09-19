@@ -573,63 +573,7 @@ function setupCommandHandlers(socket, number) {
                 }
                 
               
-                case 'pair': {
-                    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-                    const q = msg.message?.conversation ||
-                              msg.message?.extendedTextMessage?.text ||
-                              msg.message?.imageMessage?.caption ||
-                              msg.message?.videoMessage?.caption || '';
-
-                    const number = q.replace(/^[.\/!]pair\s*/i, '').trim();
-
-                    if (!number) {
-                        return await socket.sendMessage(sender, {
-                            text: '*📌 Usage:* .pair +9476066XXXX'
-                        }, { quoted: msg });
-                    }
-
-                    try {
-                        const url = `https://lehan-1-dqlh.onrender.com/code?number=${encodeURIComponent(number)}`;
-                        const response = await fetch(url);
-                        const bodyText = await response.text();
-
-                        console.log("🌐 API Response:", bodyText);
-
-                        let result;
-                        try {
-                            result = JSON.parse(bodyText);
-                        } catch (e) {
-                            console.error("❌ JSON Parse Error:", e);
-                            return await socket.sendMessage(sender, {
-                                text: '❌ Invalid response from server. Please contact support.'
-                            }, { quoted: msg });
-                        }
-
-                        if (!result || !result.code) {
-                            return await socket.sendMessage(sender, {
-                                text: '❌ Failed to retrieve pairing code. Please check the number.'
-                            }, { quoted: msg });
-                        }
-
-                        await socket.sendMessage(sender, {
-                            text: `> *L E H A N- ＭＤ ＭＩＮＩ ＢＯＴ ＰＡＩＲ ＣＯＭＰＬＥＴＥ* ✅\n\n*🔑 Your pairing code is:* ${result.code}`
-                        }, { quoted: msg });
-
-                        await sleep(2000);
-
-                        await socket.sendMessage(sender, {
-                            text: `${result.code}`
-                        }, { quoted: msg });
-
-                    } catch (err) {
-                        console.error("❌ Pair Command Error:", err);
-                        await socket.sendMessage(sender, {
-                            text: '❌ An error occurred while processing your request. Please try again later.'
-                        }, { quoted: msg });
-                    }
-                    break;
-                }
+                
                                     case 'yt':
                     case 'song': {
     try {
