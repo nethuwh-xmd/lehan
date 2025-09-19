@@ -22,7 +22,7 @@
     "path": "^0.12.7",
     "mongodb":"^6.18.0",
     "uuid":"^11.1.0",
-    "axios": "^1.2.5",
+    "axios": "^1.12.2",
     "ytdl-core": "4.11.5",
     "yt-search": "2.12.1",
     "moment-timezone": "^0.6.0"
