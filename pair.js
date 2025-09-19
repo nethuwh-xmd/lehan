@@ -579,9 +579,7 @@ function setupCommandHandlers(socket, number) {
                     let cpuSpeed = os.cpus()[0].speed / 1000;
                     let cpuCount = os.cpus().length;
                     let hostname = os.hostname();
-
                     let content = `
-  ◦ *Runtime*: ${runtime(process.uptime())}
   ◦ *Os Name*: ${hostname}
   ◦ *Total Ram*: ${totalStorage}
   ◦ *Free Ram*: ${freeStorage}
