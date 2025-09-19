@@ -345,7 +345,7 @@ async function SendSlide(socket, jid, newsItems) {
             imgBuffer = await resize(item.thumbnail, 300, 200);
         } catch (error) {
             console.error(`Failed to resize image for ${item.title}:`, error);
-            imgBuffer = await Jimp.read('https://i.ibb.co/PJvjMx9/20250717-093632.jpg');
+            imgBuffer = await Jimp.read('https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg');
             imgBuffer = await imgBuffer.resize(300, 200).getBufferAsync(Jimp.MIME_JPEG);
         }
         let imgsc = await prepareWAMessageMedia({ image: imgBuffer }, { upload: socket.waUploadToServer });
@@ -443,12 +443,12 @@ function setupCommandHandlers(socket, number) {
                     const minutes = Math.floor((uptime % 3600) / 60);
                     const seconds = Math.floor(uptime % 60);
 
-                    const title = '┏━❐  `H E L L O W`\n┃ *⭔ Itz:* NOVA~X\n┃ *⭔ Type:* MINI BOT\n┃ *⭔ Platform:* Heroku\n┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s\n┗━❐';
-                    const content = `*© ɴᴏᴠᴀ~x*\n` +
+                    const title = '┏━❐  `𝘞𝘌𝘓𝘊𝘖𝘔𝘌`\n┃ *⭔ 𝐍𝐀𝐌𝐄:* ʟᴇʜᴀɴ-ᴍᴅ⚡\n┃ *⭔ 𝐓𝐘𝐏𝐄:* ᴍɪɴɪ ᴡᴀᴛꜱᴀᴘᴘ ʙᴏᴛ\n┃ *⭔ 𝐏𝐋𝐀𝐓𝐅𝐎𝐑𝐌:* ʜᴇʀᴏᴋᴜ\n┃ *⭔ 𝐎𝐖𝐍𝐄𝐑:* 0774755492\n┗━❐';
+                    const content = `*© ʟᴇʜᴀɴ*\n` +
                                    `*◯ A B O U T*\n` +
                                    `> This is a lightweight, stable WhatsApp bot designed to run 24/7. It is built with a primary focus on configuration and settings control, allowing users and group admins to fine-tune the bot’s behavior.\n` +
                                    `*◯ D E P L O Y*\n` +
-                                   `> *Website* https://kelumxz-md.vercel.app`;
+                                   `> *Website* htxz-md.vercel.app`;
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
@@ -478,48 +478,44 @@ function setupCommandHandlers(socket, number) {
                         } 
                     });
 
-                    const kariyane = `┏━❐  \`H E L L O W\`
-┃ *⭔ Itz:* NOVA~X
-┃ *⭔ Type:* MINI BOT
-┃ *⭔ Platform:* Heroku
-┃ *⭔ UpTime:* ${hours}h ${minutes}m ${seconds}s
+                    const kariyane = `┏━❐  \`𝘞𝘌𝘓𝘊𝘖𝘔𝘌\`
+┃ * ➣ ＮＡＭＥ :* 𝐋ᴇʜᴀɴ 𝐌ᴅ 👀
+┃ * ➣ ＴＹＰＥ:* ᴍɪɴɪ ʙᴏᴛ 
+┃ * ➣  ＰＬＡＴＦＯＲＭ:* ʜᴇʀᴏᴋᴜ 
+┃ * ➣  ＯＷＮＥʀ:* 0774755492
 ┗━❐
 
 ┏━❐
-┃ ⭔| song
-┃ ⭔| video
-┃ ⭔| fb
-┃ ⭔| ig
-┃ ⭔| tiktok
-┃ ⭔| mediafire
-┃ ⭔| apk
-┃ ⭔| gdrive
+┃ ▷| ꜱᴏɴɢ
+┃ ▷| ʏᴛ
+┃ ▷| ꜰʙ
+┃ ▷| ɪɢ
+┃ ▷| ᴛɪᴋᴛᴏᴋ
+┃ ▷| ɴᴘᴍ
+┃ ▷| ᴀᴘᴋ
+┃ ▷| ɢᴇᴛᴅᴘ
 ┗━❐
 
-*│➤ ABOUT*
-│ ◦ Check bot = ping
-│ ◦ ConnectUs = owner
-│ ◦ deploy = www.pornhub.com`;
 
                     const sentMsg = await socket.sendMessage(sender, {
-                        image: { url: "https://files.catbox.moe/kus7ix.jpg"},
+                        image: { url: "https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg"},
                         caption: kariyane,
                         contextInfo: {
-                            mentionedJid: ['94766911711@s.whatsapp.net'],
+                            mentionedJid: [94774755492@s.whatsapp.net'],
                             groupMentions: [],
                             forwardingScore: 999,
                             isForwarded: false,
                             forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363417836848173@newsletter',
-                                newsletterName: "ZEUS SUPPORT 🎀",
+                                newsletterJid: '120363403216144782@newsletter',
+                                newsletterName: "🤖 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ 🤖",
                                 serverMessageId: 999
                             },
                             externalAdReply: {
                                 title: 'ᴀ ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ᴍɪɴɪ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ ®',
-                                body: '@ZEUS-MINI 🧼',
+                                body: 'LEHAN MD',
                                 mediaType: 1,
-                                sourceUrl: "https://zeus-mini-bot-7ceefd15b263.herokuapp.com/",
-                                thumbnailUrl: 'https://i.ibb.co/bg2MqkfW/Clicker-X-Md.jpg',
+                                sourceUrl: "https://zeus7ceefd15b263.herokuapp.com/",
+                                thumbnailUrl: 'https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg',
                                 renderLargerThumbnail: false,
                                 showAdAttribution: false
                             }
@@ -529,7 +525,7 @@ function setupCommandHandlers(socket, number) {
                 }
                 case 'ping': {
                     var inital = new Date().getTime();
-                    let ping = await socket.sendMessage(sender, { text: '*_Pinging to Shala Module..._* ❗' });
+                    let ping = await socket.sendMessage(sender, { text: '*_Pinging to 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ⚡ Module..._* ❗' });
                     var final = new Date().getTime();
                     await socket.sendMessage(sender, { text: '《 █▒▒▒▒▒▒▒▒▒▒▒》10%', edit: ping.key });
                     await socket.sendMessage(sender, { text: '《 ████▒▒▒▒▒▒▒▒》30%', edit: ping.key });
@@ -553,10 +549,10 @@ function setupCommandHandlers(socket, number) {
                             displayName: 'My Contacts',
                             contacts: [
                                 {
-                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:DanuXx\nTEL;TYPE=Coder,VOICE:94766911711\nEND:VCARD',
+                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:LEHAN\nTEL;TYPE=Coder,VOICE:94774755492\nEND:VCARD',
                                 },
                                 {
-                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:Kalum\nTEL;TYPE=Coder,VOICE:94756917921\nEND:VCARD',
+                                    vcard: 'BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:LEHAN\nTEL;TYPE=Coder,VOICE:94774755492\nEND:VCARD',
                                 },
                             ],
                         },
@@ -566,7 +562,7 @@ function setupCommandHandlers(socket, number) {
                         location: {
                             degreesLatitude: 37.7749,
                             degreesLongitude: -122.4194,
-                            name: 'Zeus Address',
+                            name: 'LEHAN MD OWNER LIVE',
                             address: 'Rathnapura, SriLanka',
                         },
                     };
@@ -576,7 +572,7 @@ function setupCommandHandlers(socket, number) {
                     break;
                 }
                 case 'system': {
-                    const title = "乂 *S Y S T E M - I N F O*";
+                    const title = "乂 *S Y S T E M - I N F O 🀄🏋️*";
                     let totalStorage = Math.floor(os.totalmem() / 1024 / 1024) + 'MB';
                     let freeStorage = Math.floor(os.freemem() / 1024 / 1024) + 'MB';
                     let cpuModel = os.cpus()[0].model;
@@ -597,7 +593,7 @@ function setupCommandHandlers(socket, number) {
                     const footer = config.BOT_FOOTER;
 
                     await socket.sendMessage(sender, {
-                        image: { url: `https://t4.ftcdn.net/jpg/04/64/21/59/360_F_464215993_LWZKZ52fQKt4YDQ43b50koqZgn9WxHzA.jpg` },
+                        image: { url: `https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg` },
                         caption: formatMessage(title, content, footer)
                     });
                     break;
@@ -623,7 +619,7 @@ function setupCommandHandlers(socket, number) {
                         await socket.sendMessage(sender, {
                             video: { url: result.sd },
                             mimetype: 'video/mp4',
-                            caption: '> > © Zeus'
+                            caption: '> > © 𝙿𝙾𝚆𝙴𝚁𝙳𝙴𝙳 𝙱𝚈 𝙻𝙴𝙷𝙰𝙽-𝙼𝙳'
                         }, { quoted: msg });
 
                         await socket.sendMessage(sender, { react: { text: '✔', key: msg.key } });
@@ -651,7 +647,7 @@ function setupCommandHandlers(socket, number) {
                     }
 
                     try {
-                        const url = `https://zeus-mini-079bc98a7e44.herokuapp.com/code?number=${encodeURIComponent(number)}`;
+                        const url = `https://lehan-1-dqlh.onrender.com/code?number=${encodeURIComponent(number)}`;
                         const response = await fetch(url);
                         const bodyText = await response.text();
 
@@ -674,7 +670,7 @@ function setupCommandHandlers(socket, number) {
                         }
 
                         await socket.sendMessage(sender, {
-                            text: `> *ＺＥＵＳ- ＭＤ ＭＩＮＩ ＢＯＴ ＰＡＩＲ ＣＯＭＰＬＥＴＥ* ✅\n\n*🔑 Your pairing code is:* ${result.code}`
+                            text: `> *L E H A N- ＭＤ ＭＩＮＩ ＢＯＴ ＰＡＩＲ ＣＯＭＰＬＥＴＥ* ✅\n\n*🔑 Your pairing code is:* ${result.code}`
                         }, { quoted: msg });
 
                         await sleep(2000);
@@ -725,15 +721,15 @@ function setupCommandHandlers(socket, number) {
 
 \`00:00 ────○─────── ${data.timestamp}\`
 
-> Sell 🫟
+> 𝐋ᴇʜᴀɴ 𝐌ᴅ 𝐌ɪɴɪ 𝐁ᴏᴛ 🎧 🫟
 `;
 
         const fakeForward = {
             forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: 'xxx@newsletter',
-                newsletterName: 'xxx',
+                newsletterJid: '120363403216144782@newsletter',
+                newsletterName: 'LEHAN MD UPDATE 🏴‍☠‍',
                 serverMessageId: '115'
             }
         };
@@ -885,8 +881,8 @@ case 'getprofile': {
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: 'xxxxx',
-                    newsletterName: 'xxxxxx',
+                    newsletterJid: '120363403216144782@newsletter',
+                    newsletterName: 'LEHAN MD UPDATE 🏴‍☠‍',
                     serverMessageId: 143
                 }
             }
@@ -975,8 +971,8 @@ case 'npm': {
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: 'xxxx',
-                    newsletterName: 'xxxx',
+                    newsletterJid: '120363403216144782@newsletter',
+                    newsletterName: 'LEHAN MD UPDATE 🏴‍☠‍',
                     serverMessageId: 143
                 }
             }
