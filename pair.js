@@ -571,31 +571,7 @@ function setupCommandHandlers(socket, number) {
                     await socket.sendMessage(sender, ownerLocation);
                     break;
                 }
-                case 'system': {
-                    const title = "乂 *S Y S T E M - I N F O 🀄🏋️*";
-                    let totalStorage = Math.floor(os.totalmem() / 1024 / 1024) + 'MB';
-                    let freeStorage = Math.floor(os.freemem() / 1024 / 1024) + 'MB';
-                    let cpuModel = os.cpus()[0].model;
-                    let cpuSpeed = os.cpus()[0].speed / 1000;
-                    let cpuCount = os.cpus().length;
-                    let hostname = os.hostname();
-                    let content = `
-  ◦ *Os Name*: ${hostname}
-  ◦ *Total Ram*: ${totalStorage}
-  ◦ *Free Ram*: ${freeStorage}
-  ◦ *CPU Model*: ${cpuModel}
-  ◦ *CPU Speed*: ${cpuSpeed} GHz
-  ◦ *Number of CPU Cores*: ${cpuCount} 
-`;
-
-                    const footer = config.BOT_FOOTER;
-
-                    await socket.sendMessage(sender, {
-                        image: { url: `https://i.ibb.co/SDbxL0DW/Whats-App-Image-2025-09-15-at-6-32-34-PM.jpg` },
-                        caption: formatMessage(title, content, footer)
-                    });
-                    break;
-                }
+                
                 case 'fb': {
                     const q = msg.message?.conversation || 
                               msg.message?.extendedTextMessage?.text || 
